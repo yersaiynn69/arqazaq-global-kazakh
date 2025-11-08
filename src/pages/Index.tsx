@@ -6,9 +6,11 @@ import Chats from "@/components/screens/Chats";
 import ActivityScreen from "@/components/screens/ActivityScreen";
 import Profile from "@/components/screens/Profile";
 import BottomNav from "@/components/layout/BottomNav";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("feed");
+  const [isLoading, setIsLoading] = useState(true);
 
   const renderScreen = () => {
     switch (activeTab) {
@@ -26,6 +28,10 @@ const Index = () => {
         return <Feed />;
     }
   };
+
+  if (isLoading) {
+    return <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />;
+  }
 
   return (
     <div className="relative h-screen w-full max-w-[430px] mx-auto bg-background overflow-hidden flex flex-col">
